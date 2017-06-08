@@ -4,10 +4,11 @@
   -  доступ к AuthorizedUser через [`@AuthenticationPrincipal`](http://docs.spring.io/spring-security/site/docs/current/reference/htmlsingle/#mvc-authentication-principal) и [authentication Tag](http://docs.spring.io/spring-security/site/docs/current/reference/html/taglibs.html#the-authentication-tag)
   - [Обработку 404 NotFound](https://stackoverflow.com/questions/18322279/spring-mvc-spring-security-and-error-handling)
   - локализацию ошибок валидации
-  - проверки json в тестах через [JSONassert](https://github.com/skyscreamer/JSONassert) и [через `jsonPath`](https://www.petrikainulainen.net/programming/spring-framework/integration-testing-of-spring-mvc-applications-write-clean-assertions-with-jsonpath/)
+  - проверки json в тестах через [JSONassert](https://github.com/skyscreamer/JSONassert) и [через jsonPath](https://www.petrikainulainen.net/programming/spring-framework/integration-testing-of-spring-mvc-applications-write-clean-assertions-with-jsonpath/)
   - [логирование от Postgres Driver](http://stackoverflow.com/a/43242620/548473)
   - в `.travis.yml` [сборку только ветки master](https://docs.travis-ci.com/user/customizing-the-build#Building-Specific-Branches)
   - [защиту от кэширование ajax запросов в IE](https://stackoverflow.com/a/4303862/548473)
+  - обработку запрета модификации системный юзеров через универсальный `ApplicationException`
  - рефакторинг
    - реализаовал обработку дублирования `user.email` и `meal.dateTime` через [Controller Based Exception Handling](https://spring.io/blog/2013/11/01/exception-handling-in-spring-mvc#controller-based-exception-handling)
    - поменял отключение транзакционности в тестах через `@Transactional(propagation = Propagation.NEVER)`
