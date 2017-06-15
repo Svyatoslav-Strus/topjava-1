@@ -21,7 +21,7 @@ import java.util.Objects;
  * User: gkislin
  * Date: 19.08.2014
  */
-public class MealServlet extends HttpServlet {
+public class ealServlet extends HttpServlet {
     private static final Logger LOG = LoggerFactory.getLogger(MealServlet.class);
 
     private MealRepository repository;
