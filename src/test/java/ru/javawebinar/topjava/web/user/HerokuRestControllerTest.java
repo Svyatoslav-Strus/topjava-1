@@ -16,13 +16,12 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static ru.javawebinar.topjava.Profiles.DATAJPA;
+import static ru.javawebinar.topjava.Profiles.DB_IMPLEMENTATION;
 import static ru.javawebinar.topjava.Profiles.HEROKU;
 import static ru.javawebinar.topjava.TestUtil.userHttpBasic;
 import static ru.javawebinar.topjava.UserTestData.*;
-import static ru.javawebinar.topjava.web.user.AbstractUserController.EXCEPTION_MODIFICATION_RESTRICTION;
 
-@ActiveProfiles({HEROKU, DATAJPA})
+@ActiveProfiles({HEROKU, DB_IMPLEMENTATION})
 public class HerokuRestControllerTest extends AbstractControllerTest {
 
     private static final String REST_URL = AdminRestController.REST_URL + '/';
@@ -49,8 +48,7 @@ public class HerokuRestControllerTest extends AbstractControllerTest {
         mockMvc.perform(delete(REST_URL + USER_ID)
                 .with(userHttpBasic(ADMIN)))
                 .andDo(print())
-                .andExpect(jsonMessage("$.details", EXCEPTION_MODIFICATION_RESTRICTION))
-                .andExpect(status().isUnavailableForLegalReasons());
+                .andExpect(status().is5xxServerError());
     }
 
     @Test
@@ -59,7 +57,6 @@ public class HerokuRestControllerTest extends AbstractControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .with(userHttpBasic(ADMIN))
                 .content(JsonUtil.writeValue(USER)))
-                .andExpect(jsonMessage("$.details", EXCEPTION_MODIFICATION_RESTRICTION))
-                .andExpect(status().isUnavailableForLegalReasons());
+                .andExpect(status().is5xxServerError());
     }
 }

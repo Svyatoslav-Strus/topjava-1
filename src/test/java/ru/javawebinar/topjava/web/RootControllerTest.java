@@ -9,6 +9,11 @@ import static ru.javawebinar.topjava.TestUtil.userAuth;
 import static ru.javawebinar.topjava.UserTestData.ADMIN;
 import static ru.javawebinar.topjava.UserTestData.USER;
 
+/**
+ * GKislin
+ * 10.04.2015.
+ */
+
 public class RootControllerTest extends AbstractControllerTest {
 
     @Test

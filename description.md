@@ -53,19 +53,15 @@ Hibernate, делаем конверторы для типов LocalDateTime (Ja
 -  jackson-datatype-hibernate. Тестирование через матчеры.
 -  Тестирование через SoapUi. UTF-8
 -  WebJars.
--  Bootstrap. jQuery datatables.
+-  Bootstrap. Datatables.
 -  AJAX. jQuery. Notifications.
 -  Spring Security
 -  Spring Binding/Validation
--  Работа с datatables через Ajax.
+-  Работа с Datatables через Ajax.
 -  Spring Security Test
-- [Кастомизация JSON (@JsonView) и валидации (groups)](https://drive.google.com/open?id=0B9Ye2auQ_NsFRTFsTjVHR2dXczA)
 -  Encoding password
 -  <a href="https://drive.google.com/file/d/0B9Ye2auQ_NsFNDlPZGdUNThzNUU/view">CSRF (добавление в проект защиты от межсайтовой подделки запроса)</a>
 -  form-login. Spring Security Taglib
 -  Handler interceptor
 -  Spring Exception Handling
--  Смена локали
--  Фильтрация JSON через @JsonView
--  Защита от XSS (Cross Site Scripting)
 -  <a href="https://drive.google.com/open?id=0B9Ye2auQ_NsFZkpVM19QWFBOQ2c">Деплой в Heroku</a>

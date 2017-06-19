@@ -7,19 +7,19 @@ import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.repository.MealRepository;
 
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.Collection;
 
 import static ru.javawebinar.topjava.util.ValidationUtil.checkNotFoundWithId;
 
+/**
+ * GKislin
+ * 06.03.2015.
+ */
 @Service
 public class MealServiceImpl implements MealService {
 
-    private final MealRepository repository;
-
     @Autowired
-    public MealServiceImpl(MealRepository repository) {
-        this.repository = repository;
-    }
+    private MealRepository repository;
 
     @Override
     public Meal get(int id, int userId) {
@@ -32,14 +32,14 @@ public class MealServiceImpl implements MealService {
     }
 
     @Override
-    public List<Meal> getBetweenDateTimes(LocalDateTime startDateTime, LocalDateTime endDateTime, int userId) {
+    public Collection<Meal> getBetweenDateTimes(LocalDateTime startDateTime, LocalDateTime endDateTime, int userId) {
         Assert.notNull(startDateTime, "startDateTime must not be null");
         Assert.notNull(endDateTime, "endDateTime  must not be null");
         return repository.getBetween(startDateTime, endDateTime, userId);
     }
 
     @Override
-    public List<Meal> getAll(int userId) {
+    public Collection<Meal> getAll(int userId) {
         return repository.getAll(userId);
     }
 

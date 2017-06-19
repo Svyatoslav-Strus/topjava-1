@@ -9,7 +9,6 @@ import org.junit.runner.Description;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.slf4j.bridge.SLF4JBridgeHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.test.context.ActiveProfiles;
@@ -19,12 +18,15 @@ import org.springframework.test.context.jdbc.SqlConfig;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import ru.javawebinar.topjava.ActiveDbProfileResolver;
 import ru.javawebinar.topjava.Profiles;
+import ru.javawebinar.topjava.util.ValidationUtil;
 
 import java.util.concurrent.TimeUnit;
 
 import static org.hamcrest.CoreMatchers.instanceOf;
-import static ru.javawebinar.topjava.util.ValidationUtil.getRootCause;
 
+/**
+ * User: gkislin
+ */
 @ContextConfiguration({
         "classpath:spring/spring-app.xml",
         "classpath:spring/spring-db.xml"
@@ -54,16 +56,6 @@ abstract public class AbstractServiceTest {
         }
     };
 
-    static {
-        // needed only for java.util.logging (postgres driver)
-        SLF4JBridgeHandler.install();
-    }
-
-    public boolean isJpaBased() {
-//        return Arrays.stream(env.getActiveProfiles()).noneMatch(Profiles.JDBC::equals);
-        return env.acceptsProfiles(Profiles.JPA, Profiles.DATAJPA);
-    }
-
     @AfterClass
     public static void printResult() {
         LOG.info("\n---------------------------------" +
@@ -74,13 +66,17 @@ abstract public class AbstractServiceTest {
         results.setLength(0);
     }
 
-    //  Check root cause in JUnit: https://github.com/junit-team/junit4/pull/778
+    public boolean isJpaBased() {
+//        return Arrays.stream(env.getActiveProfiles()).anyMatch(p -> Profiles.JPA.equals(p) || Profiles.DATAJPA.equals(p));
+        return env.acceptsProfiles(Profiles.JPA, Profiles.DATAJPA);
+    }
+
     public static <T extends Throwable> void validateRootCause(Runnable runnable, Class<T> exceptionClass) {
         try {
             runnable.run();
             Assert.fail("Expected " + exceptionClass.getName());
         } catch (Exception e) {
-            Assert.assertThat(getRootCause(e), instanceOf(exceptionClass));
+            Assert.assertThat(ValidationUtil.getRootCause(e), instanceOf(exceptionClass));
         }
     }
 }

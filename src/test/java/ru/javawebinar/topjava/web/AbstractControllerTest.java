@@ -8,9 +8,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.ResultMatcher;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import ru.javawebinar.topjava.AllActiveProfileResolver;
@@ -20,8 +18,11 @@ import ru.javawebinar.topjava.service.UserService;
 import javax.annotation.PostConstruct;
 
 import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
+/**
+ * User: gkislin
+ * Date: 10.08.2014
+ */
 @ContextConfiguration({
         "classpath:spring/spring-app.xml",
         "classpath:spring/spring-mvc.xml",
@@ -29,7 +30,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 })
 @WebAppConfiguration
 @RunWith(SpringJUnit4ClassRunner.class)
-@Transactional
 @ActiveProfiles(resolver = AllActiveProfileResolver.class)
 abstract public class AbstractControllerTest {
 
@@ -51,9 +51,6 @@ abstract public class AbstractControllerTest {
     @Autowired
     private WebApplicationContext webApplicationContext;
 
-    @Autowired
-    protected MessageUtil messageUtil;
-
     @PostConstruct
     private void postConstruct() {
         mockMvc = MockMvcBuilders
@@ -67,13 +64,5 @@ abstract public class AbstractControllerTest {
     public void setUp() {
         userService.evictCache();
         jpaUtil.clear2ndLevelHibernateCache();
-    }
-
-    protected String getMessage(String code) {
-        return messageUtil.getMessage(code, MessageUtil.RU_LOCALE);
-    }
-
-    public ResultMatcher jsonMessage(String path, String code) {
-        return jsonPath(path).value(getMessage(code));
     }
 }

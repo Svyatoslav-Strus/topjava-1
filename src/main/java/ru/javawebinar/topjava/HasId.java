@@ -1,5 +1,9 @@
 package ru.javawebinar.topjava;
 
+/**
+ * gkislin
+ * 12.02.2017
+ */
 public interface HasId {
     Integer getId();
 

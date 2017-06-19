@@ -2,6 +2,10 @@ package ru.javawebinar.topjava.to;
 
 import ru.javawebinar.topjava.HasId;
 
+/**
+ * gkislin
+ * 18.02.2017
+ */
 abstract public class BaseTo implements HasId {
     protected Integer id;
 

@@ -3,6 +3,10 @@ package ru.javawebinar.topjava.util;
 import ru.javawebinar.topjava.HasId;
 import ru.javawebinar.topjava.util.exception.NotFoundException;
 
+/**
+ * User: gkislin
+ * Date: 14.05.2014
+ */
 public class ValidationUtil {
     private ValidationUtil() {
     }
@@ -20,9 +24,9 @@ public class ValidationUtil {
         return object;
     }
 
-    public static void checkNotFound(boolean found, String arg) {
+    public static void checkNotFound(boolean found, String msg) {
         if (!found) {
-            throw new NotFoundException(arg);
+            throw new NotFoundException("Not found entity with " + msg);
         }
     }
 
@@ -41,7 +45,7 @@ public class ValidationUtil {
         }
     }
 
-    //    http://stackoverflow.com/a/28565320/548473
+//    http://stackoverflow.com/a/28565320/548473
     public static Throwable getRootCause(Throwable t) {
         Throwable result = t;
         Throwable cause;
