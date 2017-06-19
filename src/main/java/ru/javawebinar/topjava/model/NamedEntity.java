@@ -6,10 +6,7 @@ import org.hibernate.validator.constraints.SafeHtml;
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 
-/**
- * User: gkislin
- * Date: 22.08.2014
- */
+
 @MappedSuperclass
 public class NamedEntity extends BaseEntity {
 
@@ -36,6 +33,6 @@ public class NamedEntity extends BaseEntity {
 
     @Override
     public String toString() {
-        return name;
+        return String.format("Entity %s (%s, '%s')", getClass().getName(), getId(), name);
     }
 }

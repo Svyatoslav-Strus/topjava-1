@@ -21,15 +21,15 @@ import static ru.javawebinar.topjava.util.UserUtil.updateFromTo;
 import static ru.javawebinar.topjava.util.ValidationUtil.checkNotFound;
 import static ru.javawebinar.topjava.util.ValidationUtil.checkNotFoundWithId;
 
-/**
- * GKislin
- * 06.03.2015.
- */
 @Service("userService")
 public class UserServiceImpl implements UserService, UserDetailsService {
 
+    private final UserRepository repository;
+
     @Autowired
-    private UserRepository repository;
+    public UserServiceImpl(UserRepository repository) {
+        this.repository = repository;
+    }
 
     @CacheEvict(value = "users", allEntries = true)
     @Override
@@ -40,7 +40,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @CacheEvict(value = "users", allEntries = true)
     @Override
-    public void delete(int id) {
+    public void delete(int id) throws NotFoundException {
         checkNotFoundWithId(repository.delete(id), id);
     }
 
@@ -79,6 +79,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @CacheEvict(value = "users", allEntries = true)
     @Override
     public void evictCache() {
+        // only for evict cache
     }
 
     @CacheEvict(value = "users", allEntries = true)

@@ -9,13 +9,10 @@ import ru.javawebinar.topjava.repository.JpaUtil;
 
 import javax.validation.ConstraintViolationException;
 import java.util.Collections;
+import java.util.Date;
 
-/**
- * GKislin
- * 07.04.2015.
- */
 abstract public class AbstractJpaUserServiceTest extends AbstractUserServiceTest {
-    @SuppressWarnings("SpringJavaAutowiringInspection")
+
     @Autowired
     private JpaUtil jpaUtil;
 
@@ -31,7 +28,7 @@ abstract public class AbstractJpaUserServiceTest extends AbstractUserServiceTest
         validateRootCause(() -> service.save(new User(null, "  ", "invalid@yandex.ru", "password", 2000, Role.ROLE_USER)), ConstraintViolationException.class);
         validateRootCause(() -> service.save(new User(null, "User", "  ", "password", 2000, Role.ROLE_USER)), ConstraintViolationException.class);
         validateRootCause(() -> service.save(new User(null, "User", "invalid@yandex.ru", "  ", 2000, Role.ROLE_USER)), ConstraintViolationException.class);
-        validateRootCause(() -> service.save(new User(null, "User", "invalid@yandex.ru", "password", 9, true, Collections.emptySet())), ConstraintViolationException.class);
-        validateRootCause(() -> service.save(new User(null, "User", "invalid@yandex.ru", "password", 10001, true, Collections.emptySet())), ConstraintViolationException.class);
+        validateRootCause(() -> service.save(new User(null, "User", "invalid@yandex.ru", "password", 9, true, new Date(), Collections.emptySet())), ConstraintViolationException.class);
+        validateRootCause(() -> service.save(new User(null, "User", "invalid@yandex.ru", "password", 10001, true, new Date(), Collections.emptySet())), ConstraintViolationException.class);
     }
 }

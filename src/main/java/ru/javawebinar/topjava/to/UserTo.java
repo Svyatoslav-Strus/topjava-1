@@ -1,13 +1,13 @@
 package ru.javawebinar.topjava.to;
 
 import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.Range;
 import org.hibernate.validator.constraints.SafeHtml;
 import ru.javawebinar.topjava.util.UserUtil;
 
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 public class UserTo extends BaseTo implements Serializable {
@@ -22,7 +22,7 @@ public class UserTo extends BaseTo implements Serializable {
     @SafeHtml
     private String email;
 
-    @Size(min = 5, max = 64, message = " must between 5 and 64 characters")
+    @Length(min = 5, max = 32)
     @SafeHtml
     private String password;
 
@@ -65,12 +65,12 @@ public class UserTo extends BaseTo implements Serializable {
         this.email = email;
     }
 
-    public Integer getCaloriesPerDay() {
-        return caloriesPerDay;
-    }
-
     public void setCaloriesPerDay(Integer caloriesPerDay) {
         this.caloriesPerDay = caloriesPerDay;
+    }
+
+    public Integer getCaloriesPerDay() {
+        return caloriesPerDay;
     }
 
     @Override

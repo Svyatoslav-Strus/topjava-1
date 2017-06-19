@@ -1,12 +1,5 @@
 var ajaxUrl = "ajax/profile/meals/";
 var datatableApi;
-var editTitleKey = "meals.edit";
-
-// $(document).ready(function () {
-function clearFilter() {
-    $("#filter")[0].reset();
-    $.get(ajaxUrl, updateTableByData);
-}
 
 function updateTable() {
     $.ajax({
@@ -17,17 +10,16 @@ function updateTable() {
     });
 }
 
+function clearFilter() {
+    $("#filter")[0].reset();
+    $.get(ajaxUrl, updateTableByData);
+}
+
 $(function () {
     datatableApi = $('#datatable').DataTable(extendsOpts({
         "columns": [
             {
-                "data": "dateTime",
-                "render": function (date, type, row) {
-                    if (type == 'display') {
-                        return formatDate(date);
-                    }
-                    return date;
-                }
+                "data": "dateTimeUI"
             },
             {
                 "data": "description"
@@ -59,6 +51,7 @@ $(function () {
 
     $.datetimepicker.setLocale(localeCode);
 
+//  http://xdsoft.net/jqplugins/datetimepicker/
     var startDate = $('#startDate');
     var endDate = $('#endDate');
     startDate.datetimepicker({
